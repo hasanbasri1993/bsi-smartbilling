@@ -144,9 +144,9 @@
 				'customer_email' => $param->getCustomerEmail(),
 				'customer_phone' => $param->getCustomerPhone()
 			);
-			if (empty($param->getVirtualAccount())) $data_request['virtual_account'] = $param->getVirtualAccount();
-			if (empty($param->getDatetimeExpired())) $data_request['datetime_expired'] = $param->getDatetimeExpired();
-			if (empty($param->getDescription())) $data_request['description'] = $param->getDescription();
+			if (!empty($param->getVirtualAccount())) $data_request['virtual_account'] = $param->getVirtualAccount();
+			if (!empty($param->getDatetimeExpired())) $data_request['datetime_expired'] = $param->getDatetimeExpired();
+			if (!empty($param->getDescription())) $data_request['description'] = $param->getDescription();
 			return $this->requestClient($data_request);
 		}
 		
@@ -184,8 +184,8 @@
 		
 		function inquiryBillingCheck(Parameter $param): string
 		{
-			if (empty($param->getClientId())) return 'Client ID is required';
-			if (empty($param->getTrxId())) return 'Transaction ID is required';
+			if (!empty($param->getClientId())) return 'Client ID is required';
+			if (!empty($param->getTrxId())) return 'Transaction ID is required';
 			return "";
 		}
 		
@@ -214,8 +214,8 @@
 				'customer_email' => $param->getCustomerEmail(),
 				'customer_phone' => $param->getCustomerPhone()
 			);
-			if (empty($param->getDatetimeExpired())) $data_request['datetime_expired'] = $param->getDatetimeExpired();
-			if (empty($param->getDescription())) $data_request['description'] = $param->getDescription();
+			if (!empty($param->getDatetimeExpired())) $data_request['datetime_expired'] = $param->getDatetimeExpired();
+			if (!empty($param->getDescription())) $data_request['description'] = $param->getDescription();
 			return $this->requestClient($data_request);
 		}
 		
