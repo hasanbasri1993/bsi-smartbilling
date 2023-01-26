@@ -114,14 +114,21 @@
 				if ($response->getBody()) {
 					$response_json = json_decode($response->getBody(), true);
 					if ($response_json['status'] !== '000') return $response_json;
-					else return self::decrypt($response_json['data'], $this->client_id, $this->secret_key);
+                    else {
+                        $data = [];
+                        $data['status'] = $response_json['status'];
+                        $data['data'] = self::decrypt($response_json['data'], $this->client_id, $this->secret_key);
+                        if (isset($response_json['data_extra']))
+                            $data['data_extra'] = self::decrypt($response_json['data_extra'], $this->client_id, $this->secret_key);
+                        return $data;
+                    }
 				}
 			} catch (GuzzleException $e) {
 				return $e->getMessage();
 			}
 			return true;
 		}
-		
+
 		/**
 		 * @param Parameter $param
 		 * Parameter Mandatory
